@@ -1,20 +1,21 @@
 [
-    {
-        "id": "prod_001",
-        "title": "Atomic Habits",
-        "price": 850,
-        "original_price": 1200,
-        "discount": 29,
-        "currency": "BDT",
-        "image": "https://m.media-amazon.com/images/I/81wgcld4wxL._AC_UF1000,1000_QL80_.jpg",
-        "store": "rokomari",
-        "affiliate_link": "https://www.rokomari.com/book/12345/atomic-habits?ref=MY_AFF_ID",
-        "category": "Books",
-        "rating": 4.8,
-        "description": "No matter your goals, Atomic Habits offers a proven framework for improving--every day.",
-        "is_featured": true,
-        "stock_status": "in_stock",
-        "last_checked": "2026-01-31T12:00:00Z",
-        "date_added": "2026-01-30T10:00:00Z"
-    }
+  {
+    "id": "prod_1769890364015",
+    "affiliate_link": "https://rkmri.co/RN2yeTmIyTlA/",
+    "store": "rokomari",
+    "title": "মিসির আলি সমগ্র ১ (হার্ডকভার)",
+    "subtitle": "by হুমায়ূন আহমেদ",
+    "price": 799,
+    "original_price": 1000,
+    "discount": 20,
+    "currency": "BDT",
+    "image": "https://rokbucket.rokomari.io/ProductNew20190903/260X372/Misir_Ali_Samagra_1-Humayun_Ahmed-3ad64-56.jpg",
+    "images": [],
+    "category": "Books",
+    "description": "\"মিসির আলি সমগ্র-১\" \nবইটির সূচিপত্রঃ \nদেবী \nনিশীথিনী \nনিষাদ \nঅন্যভুবন \nবৃহন্নলা \nভয় \nবিপদ \nঅনীশ \nমিসির আলির অমীমাংসিত রহস্য \nআমি এবং আমরা \nতন্দ্রাবিলাস \nহিমুর দ্বিতীয় প্রহর \nআমিই মিসির আলি \nবাঘবন্দি মিসির আলি \nকহেন কবি কালিদাস \nহরতন ইশকাপন \nমিসির আলির চশমা\n\n\"মিসির আলি সমগ্র-১\" বই এর ভূমিকা থেকে নেয়াঃ \nমিসির আলির সব লেখা এক মলাটের ভেতর। পাঠকদের জন্য সুসংবাদ না দুঃসংবাদ বুঝতে পারছি না। দুর্মূল্যের বাজারে মিসির আলি সাহেবের মতো ভালো মানুষ আটশ টাকা নিয়ে নেবেন? বইয়ের দাম না-কি আটশ টাকা। আমার জন্যে ভালো হয়েছে। ছড়ানো ছিটানো মিসির আলি এক সঙ্গে পাচ্ছি। অনন্যার মনিরকে ধন্যবাদ। \nহুমায়ূন আহমেদ",
+    "is_featured": true,
+    "date_added": "2026-01-31T20:12:44.015Z",
+    "stock_status": "in_stock",
+    "last_checked": "2026-01-31T20:25:09.885Z"
+  }
 ]
