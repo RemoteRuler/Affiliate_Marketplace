@@ -1,0 +1,304 @@
+<!-- 
+  COPYRIGHT REMOTE RULER. ALL RIGHTS RESERVED. 
+  UNAUTHORIZED COPYING, USE, OR DISTRIBUTION IS STRICTLY PROHIBITED.
+-->
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Details - Remote Ruler</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/ai-monitor.css">
+    <style>
+        .detail-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            margin-top: 3rem;
+        }
+
+        @media(max-width: 768px) {
+            .detail-container {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+        }
+
+        .main-image {
+            width: 100%;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow-md);
+            border: 1px solid var(--border);
+        }
+
+        .product-meta {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .store-tag {
+            display: inline-block;
+            margin-bottom: 1rem;
+        }
+
+        .buy-btn {
+            background-color: var(--secondary);
+            color: white;
+            padding: 1rem 2rem;
+            font-size: 1.2rem;
+            text-align: center;
+            border-radius: var(--radius);
+            margin-top: 2rem;
+            display: block;
+            transition: transform 0.2s;
+        }
+
+        .buy-btn:hover {
+            transform: scale(1.02);
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <div class="container nav-wrapper">
+            <a href="index.html" class="logo">
+                <span style="color:#ef4444">Remote</span><span style="color:#3b82f6">Ruler</span>
+            </a>
+            <nav class="nav-links">
+                <a href="index.html" class="nav-link">Home</a>
+                <a href="shop.html" class="nav-link">Explore</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        <div id="product-content" class="detail-container">
+            <!-- Filled by JS -->
+            <div class="centered-loading">Loading...</div>
+        </div>
+
+        <div class="related-section">
+            <h3 class="section-title">Related Products</h3>
+            <div id="related-grid" class="product-grid"></div>
+        </div>
+    </main>
+
+    <!-- Scripts -->
+    <script src="assets/js/utils.js"></script>
+    <script src="assets/js/data.js"></script>
+    <script src="assets/js/parser.js"></script>
+    <script src="assets/js/app.js"></script>
+    <script>
+        window.changeImage = (src) => {
+            document.getElementById('main-product-image').src = src;
+            document.querySelectorAll('.gallery-thumb').forEach(img => {
+                img.style.borderColor = (img.src === src) ? 'var(--primary)' : 'transparent';
+            });
+        };
+
+        window.initProductDetail = () => {
+            const id = Utils.getQueryParam('id');
+            const product = DataManager.getById(id);
+            const container = document.getElementById('product-content');
+
+            if (!product) {
+                container.innerHTML = '<h2>Product not found</h2><a href="shop.html" class="btn btn-primary">Go Back</a>';
+                return;
+            }
+
+            // Update Title
+            document.title = `${product.title} - NexShop`;
+
+            container.innerHTML = `
+                <div>
+                    <img id="main-product-image" src="${product.image}" alt="${product.title}" class="main-image">
+                    
+                    ${product.images && product.images.length > 0 ? `
+                        <div class="gallery-grid">
+                            <img src="${product.image}" class="gallery-thumb active" onclick="changeImage(this.src)">
+                            ${product.images.map(img => `
+                                <img src="${img}" class="gallery-thumb" onclick="changeImage('${img}')">
+                            `).join('')}
+                        </div>
+                    ` : ''}
+                </div>
+                <div class="product-meta">
+                    <span class="badge badge-${product.store.toLowerCase()} store-tag">${product.store} Product</span>
+                    <h1 class="p-details-title">${product.title}</h1>
+                    ${product.subtitle ? `<div class="p-details-subtitle">${product.subtitle}</div>` : ''}
+                    <div class="p-details-category">
+                        Category: <a href="shop.html?category=${product.category}" style="color:var(--primary)">${product.category}</a>
+                    </div>
+                    
+                    <div class="p-details-price-row">
+                        <span class="p-details-price">${Utils.formatMoney(product.price, product.currency)}</span>
+                        ${product.discount > 0 ? `<span class="p-details-price-old">${Utils.formatMoney(product.original_price, product.currency)}</span>` : ''}
+                        ${product.discount > 0 ? `<span class="badge" style="background:var(--secondary); color:#fff;">Save ${product.discount}%</span>` : ''}
+                    </div>
+
+                    <!-- Stock Status Display -->
+                    <div id="ai-stock-panel" class="stock-monitor">
+                         <div id="stock-status-display" style="display: flex; align-items: center; gap: 0.8rem;">
+                            <span class="status-indicator loading"></span>
+                            <span id="stock-text" class="stock-status">Checking availability...</span>
+                        </div>
+                        <div id="last-checked-container" style="display:none;">
+                             Last Checked: <span id="last-checked-time">Just now</span>
+                        </div>
+                    </div>
+
+                    <div id="description-wrapper">
+                        <p id="product-desc" class="p-details-desc clamped">
+                            ${product.description || 'No description available for this product.'}
+                        </p>
+                        <span id="see-more-btn" class="see-more-btn" onclick="toggleDescription()">See more</span>
+                    </div>
+
+
+
+                    <a href="${product.affiliate_link}" target="_blank" class="buy-btn">
+                        Buy Now on ${product.store.charAt(0).toUpperCase() + product.store.slice(1)}
+                    </a>
+                    
+                    <p style="margin-top: 1rem; font-size: 0.8rem; color: var(--text-muted);">
+                        * This is an affiliate link. We may earn a commission from qualifying purchases.
+                    </p>
+                </div>
+            `;
+
+            // Load Related (Same Category, exclude self)
+            const related = DataManager.getAll()
+                .filter(p => p.category === product.category && p.id !== product.id)
+                .slice(0, 4);
+
+            const relGrid = document.getElementById('related-grid');
+            if (related.length === 0) relGrid.innerHTML = "No related products found.";
+            else related.forEach(p => relGrid.appendChild(createProductCard(p)));
+
+            function initStockScanner(product) {
+                const statusEl = document.getElementById('stock-text');
+                const indicatorEl = document.querySelector('.status-indicator');
+                const timeEl = document.getElementById('last-checked-time');
+
+                // Set initial state
+                statusEl.innerText = "Connecting to live store...";
+
+                // Perform Real-Time Check
+                AffiliateParser.checkLiveStock(product.affiliate_link, product.store).then(result => {
+                    // Normalize result to support old string return or new object return
+                    const liveStatus = (typeof result === 'string') ? result : result.status;
+                    const quantity = (result && result.quantity) ? result.quantity : null;
+
+                    let text = "";
+                    let color = "";
+
+                    if (liveStatus === 'in_stock') {
+                        if (quantity) {
+                            text = `${quantity} copies available`;
+                            color = "#10b981"; // Green
+                        } else {
+                            text = "In Stock";
+                            color = "#10b981"; // Green
+                        }
+                    } else if (liveStatus === 'out_of_stock') {
+                        text = "Out of Stock";
+                        color = "#ef4444"; // Red
+                    } else {
+                        text = "Check Store for Availability";
+                        color = "#f59e0b"; // Orange
+                    }
+
+                    // Update UI
+                    statusEl.innerText = text;
+                    statusEl.style.color = color;
+
+                    indicatorEl.classList.remove('loading');
+                    indicatorEl.style.backgroundColor = color;
+                    indicatorEl.style.boxShadow = `0 0 8px ${color}`;
+
+                    // Update Badge if needed
+                    if (liveStatus === 'out_of_stock') {
+                        document.querySelector('.buy-btn').style.opacity = '0.5';
+                        document.querySelector('.buy-btn').innerText = 'Out of Stock';
+                    }
+
+                    // Update Time
+                    timeEl.innerText = new Date().toLocaleString();
+
+                    // Save to Local Data
+                    product.stock_status = liveStatus;
+                    product.last_checked = new Date().toISOString();
+                    DataManager.update(product.id, {
+                        stock_status: liveStatus,
+                        last_checked: product.last_checked
+                    });
+                }).catch(err => {
+                    console.error("Stock Check Error:", err);
+                    statusEl.innerText = "⚠️ Connection Failed";
+                    statusEl.style.color = "#ef4444";
+                    indicatorEl.classList.remove('loading');
+                    indicatorEl.style.backgroundColor = "#ef4444";
+                    indicatorEl.style.boxShadow = "none";
+                });
+            };
+
+            window.changeImage = function (src) {
+                const mainImg = document.getElementById('main-product-image');
+                mainImg.src = src;
+
+                // Update active state
+                document.querySelectorAll('.gallery-thumb').forEach(thumb => {
+                    thumb.classList.remove('active');
+                    if (thumb.src === src) thumb.classList.add('active');
+                });
+            };
+
+            window.toggleDescription = function () {
+                const desc = document.getElementById('product-desc');
+                const btn = document.getElementById('see-more-btn');
+                const isClamped = desc.classList.contains('clamped');
+
+                if (isClamped) {
+                    desc.classList.remove('clamped');
+                    btn.innerText = 'See less';
+                } else {
+                    desc.classList.add('clamped');
+                    btn.innerText = 'See more';
+                }
+            };
+
+            const checkDescriptionClamping = () => {
+                const desc = document.getElementById('product-desc');
+                const btn = document.getElementById('see-more-btn');
+                if (!desc || !btn) return;
+
+                // Temporarily remove clamping to check full height
+                desc.classList.remove('clamped');
+                const fullHeight = desc.scrollHeight;
+                desc.classList.add('clamped');
+
+                // Get line height (approximate if not set)
+                const style = window.getComputedStyle(desc);
+                const lineHeight = parseInt(style.lineHeight);
+                const clampedHeight = lineHeight * 3;
+
+                if (fullHeight > clampedHeight + 5) { // 5px buffer
+                    btn.style.display = 'inline-block';
+                } else {
+                    btn.style.display = 'none';
+                }
+            };
+
+            initStockScanner(product);
+            setTimeout(checkDescriptionClamping, 100); // Wait for rendering
+        };
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,120 @@
+<!-- 
+  COPYRIGHT REMOTE RULER. ALL RIGHTS RESERVED. 
+  UNAUTHORIZED COPYING, USE, OR DISTRIBUTION IS STRICTLY PROHIBITED.
+-->
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Remote Ruler - Premium Affiliate Marketplace</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+
+<body>
+
+    <!-- Navbar -->
+    <header>
+        <div class="container nav-wrapper">
+            <a href="index.html" class="logo">
+                <span style="color:#ef4444">Remote</span><span style="color:#3b82f6">Ruler</span>
+            </a>
+            <nav class="nav-links">
+                <a href="index.html" class="nav-link">Home</a>
+                <a href="shop.html" class="nav-link">Explore</a>
+                <a href="shop.html?category=Electronics" class="nav-link">Electronics</a>
+                <a href="shop.html?category=Books" class="nav-link">Books</a>
+                <a href="admin.html" class="nav-link">Admin</a>
+            </nav>
+            <div class="nav-actions">
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container hero-content">
+            <h1 class="hero-title">Discover the Best Deals</h1>
+            <p class="hero-subtitle">
+                Curated products from Rokomari, Amazon, Star Tech, and more. Compare prices and grab the best deals.
+            </p>
+            <div>
+                <a href="shop.html" class="btn btn-hero">Shop Now</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Store Filters -->
+    <section class="container filter-bar">
+        <div class="filter-wrapper">
+            <a href="shop.html?store=rokomari">
+                <span class="badge badge-rokomari">Rokomari</span>
+            </a>
+            <a href="shop.html?store=amazon">
+                <span class="badge badge-amazon">Amazon</span>
+            </a>
+            <a href="shop.html?store=aliexpress">
+                <span class="badge badge-aliexpress">AliExpress</span>
+            </a>
+            <a href="shop.html?store=pickaboo">
+                <span class="badge badge-pickaboo">Pickaboo</span>
+            </a>
+            <a href="shop.html?store=star-tech">
+                <span class="badge badge-star-tech">Star Tech</span>
+            </a>
+            <a href="shop.html?store=ryans">
+                <span class="badge badge-ryans">Ryans</span>
+            </a>
+            <a href="shop.html?store=bdshop">
+                <span class="badge badge-bdshop">BDShop</span>
+            </a>
+            <a href="shop.html?store=others">
+                <span class="badge badge-others">Others</span>
+            </a>
+
+        </div>
+    </section>
+
+    <!-- Featured Products -->
+    <main class="container" style="margin-top: 4rem;">
+        <div class="section-header">
+            <h2 class="section-title">Featured Products</h2>
+            <a href="shop.html" style="color: var(--primary); font-weight: 600;">View All &rarr;</a>
+        </div>
+
+        <div id="featured-grid" class="product-grid">
+            <!-- Products injected by JS -->
+            <div style="grid-column: 1/-1; text-align: center; padding: 2rem;">Loading Products...</div>
+        </div>
+    </main>
+
+    <!-- Categories -->
+    <section class="section-white">
+        <div class="container">
+            <h2 class="section-title centered">Popular Categories</h2>
+            <div class="category-grid">
+                <a href="shop.html?category=Electronics" class="category-card">Electronics</a>
+                <a href="shop.html?category=Books" class="category-card">Books</a>
+                <a href="shop.html?category=Fashion" class="category-card">Fashion</a>
+                <a href="shop.html?category=Gadgets" class="category-card">Gadgets</a>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>&copy; Remote Ruler Affiliate Market. All rights reserved.</p>
+            <p style="font-size: 0.9rem; margin-top: 0.5rem;">Prices and availability subject to change.</p>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="assets/js/utils.js"></script>
+    <script src="assets/js/data.js"></script>
+    <script src="assets/js/app.js"></script>
+</body>
+
+</html>
