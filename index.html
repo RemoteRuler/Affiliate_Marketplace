@@ -1,0 +1,1619 @@
+<!-- 
+  COPYRIGHT REMOTE RULER. ALL RIGHTS RESERVED. 
+  UNAUTHORIZED COPYING, USE, OR DISTRIBUTION IS STRICTLY PROHIBITED.
+-->
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Remote Ruler - Premium Affiliate Marketplace</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* --- CSS CONSTANTS & RESET --- */
+        :root {
+            --primary: #2563eb;
+            --primary-dark: #1e40af;
+            --secondary: #f59e0b;
+            --bg-light: #f8fafc;
+            --bg-white: #ffffff;
+            --text-main: #1e293b;
+            --text-muted: #64748b;
+            --border: #e2e8f0;
+            --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+            --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+            --radius: 0.5rem;
+            --font-sans: 'Inter', system-ui, sans-serif;
+        }
+
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: var(--font-sans);
+            background-color: var(--bg-light);
+            color: var(--text-main);
+            line-height: 1.5;
+            overflow-x: hidden;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+
+        /* --- UI COMPONENTS --- */
+        header {
+            background: var(--bg-white);
+            border-bottom: 1px solid var(--border);
+            position: sticky;
+            top: 0;
+            z-index: 50;
+            box-shadow: var(--shadow-sm);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+        }
+
+        .nav-wrapper {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 70px;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .nav-link {
+            font-weight: 500;
+            color: var(--text-main);
+            transition: color 0.2s;
+            cursor: pointer;
+        }
+
+        .nav-link:hover,
+        .nav-link.active {
+            color: var(--primary);
+        }
+
+        .libutton {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 7px;
+            text-align: center;
+            outline: none;
+            text-decoration: none !important;
+            color: #ffffff !important;
+            width: 200px;
+            height: 32px;
+            border-radius: 16px;
+            background-color: #0A66C2;
+            font-family: "SF Pro Text", Helvetica, sans-serif;
+            margin: 0 auto;
+            font-size: 14px;
+            font-weight: 600;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 4px 14px 0 rgba(10, 102, 194, 0.3);
+            animation: liEntrance 0.8s ease-out, liPulse 3s infinite ease-in-out;
+        }
+
+        .libutton:hover {
+            transform: translateY(-4px) scale(1.05);
+            background-color: #08529d;
+            box-shadow: 0 10px 30px rgba(10, 102, 194, 0.6), inset 0 0 10px rgba(255, 255, 255, 0.3);
+        }
+
+        .libutton:active {
+            transform: translateY(-1px) scale(0.95);
+            box-shadow: 0 2px 10px rgba(10, 102, 194, 0.4);
+            transition: all 0.1s;
+        }
+
+        .libutton::after {
+            content: "";
+            position: absolute;
+            top: -50%;
+            left: -100%;
+            width: 100%;
+            height: 200%;
+            background: linear-gradient(to right,
+                    rgba(255, 255, 255, 0) 0%,
+                    rgba(255, 255, 255, 0.5) 50%,
+                    rgba(255, 255, 255, 0) 100%);
+            transform: rotate(45deg);
+            transition: all 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .libutton:hover::after {
+            left: 100%;
+        }
+
+        @keyframes liEntrance {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes liPulse {
+
+            0%,
+            100% {
+                box-shadow: 0 4px 14px 0 rgba(10, 102, 194, 0.3);
+            }
+
+            50% {
+                box-shadow: 0 4px 25px 6px rgba(10, 102, 194, 0.6);
+            }
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0.5rem 1rem;
+            border-radius: var(--radius);
+            font-weight: 600;
+            transition: all 0.2s;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn-primary {
+            background-color: var(--primary);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background-color: var(--primary-dark);
+        }
+
+        .badge {
+            padding: 0.25rem 0.5rem;
+            border-radius: 9999px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+
+        .badge-rokomari {
+            background: #ffe4e6;
+            color: #e11d48;
+        }
+
+        .badge-amazon {
+            background: #fff7ed;
+            color: #ea580c;
+        }
+
+        .badge-aliexpress {
+            background: #fef2f2;
+            color: #dc2626;
+        }
+
+        .badge-pickaboo {
+            background: #fffbeb;
+            color: #d97706;
+        }
+
+        .badge-star-tech {
+            background: #fdf2f8;
+            color: #db2777;
+        }
+
+        .badge-ryans {
+            background: #f0f9ff;
+            color: #0284c7;
+        }
+
+        .badge-bdshop {
+            background: #f0fdf4;
+            color: #16a34a;
+        }
+
+        .badge-others {
+            background: #f1f5f9;
+            color: #475569;
+        }
+
+        /* --- PRODUCT GRID & CARDS --- */
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 2rem;
+            padding: 2rem 0;
+        }
+
+        .product-card {
+            background: var(--bg-white);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            overflow: hidden;
+            transition: transform 0.2s, box-shadow 0.2s;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .product-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .product-image {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            background: #f1f5f9;
+        }
+
+        .card-body {
+            padding: 1rem;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .product-title {
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            line-height: 1.4;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .product-subtitle {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            margin-bottom: 0.5rem;
+            display: -webkit-box;
+            -webkit-line-clamp: 1;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .price-area {
+            margin-top: auto;
+            display: flex;
+            align-items: baseline;
+            gap: 0.5rem;
+        }
+
+        .current-price {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        .old-price {
+            text-decoration: line-through;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            opacity: 0.7;
+        }
+
+        .discount-tag {
+            font-size: 0.75rem;
+            color: var(--secondary);
+            font-weight: 700;
+        }
+
+        /* --- DISCOUNT BADGE (IMG OVERLAY) --- */
+        .discount-badge {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background: #ef4444;
+            color: white;
+            width: 55px;
+            height: 55px;
+            border-radius: 50%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            font-size: 0.85rem;
+            line-height: 1;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            z-index: 5;
+            text-transform: uppercase;
+            border: 2px dashed rgba(255, 255, 255, 0.4);
+            animation: badgePop 0.3s ease-out;
+        }
+
+        .discount-badge span {
+            font-size: 0.6rem;
+            margin-top: 2px;
+        }
+
+        @keyframes badgePop {
+            0% {
+                transform: scale(0);
+                rotate: -20deg;
+            }
+
+            70% {
+                transform: scale(1.1);
+                rotate: 10deg;
+            }
+
+            100% {
+                transform: scale(1);
+                rotate: 0deg;
+            }
+        }
+
+        /* --- VIEWS --- */
+        .view {
+            display: none;
+            min-height: 80vh;
+        }
+
+        .view.active {
+            display: block;
+        }
+
+        /* --- HERO SECTION --- */
+        .hero {
+            background: linear-gradient(135deg, var(--primary) 0%, #3b82f6 100%);
+            padding: 4rem 0;
+            color: white;
+            text-align: center;
+        }
+
+        .hero-title {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            font-weight: 800;
+        }
+
+        .hero-subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            margin-bottom: 2rem;
+            max-width: 600px;
+            margin: 0 auto 2rem;
+            transition: opacity 0.5s ease-in-out;
+            min-height: 2.5rem;
+        }
+
+        /* --- SHOP LAYOUT --- */
+        .page-layout {
+            display: grid;
+            grid-template-columns: 250px 1fr;
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        @media(max-width: 768px) {
+            .page-layout {
+                grid-template-columns: 1fr;
+            }
+
+            .sidebar {
+                display: none;
+            }
+        }
+
+        .sidebar {
+            background: var(--bg-white);
+            padding: 1.5rem;
+            border-radius: var(--radius);
+            border: 1px solid var(--border);
+            height: fit-content;
+        }
+
+        .filter-group {
+            margin-bottom: 2rem;
+        }
+
+        .filter-title {
+            font-weight: 700;
+            margin-bottom: 0.8rem;
+            display: block;
+        }
+
+        .filter-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 0.5rem;
+            cursor: pointer;
+        }
+
+        .search-bar {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            margin-bottom: 1rem;
+        }
+
+        .shop-toolbar {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 1rem;
+        }
+
+        /* --- PRODUCT DETAIL --- */
+        .detail-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            margin-top: 3rem;
+        }
+
+        @media(max-width: 768px) {
+            .detail-container {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+        }
+
+        .main-image {
+            width: 100%;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow-md);
+            border: 1px solid var(--border);
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+
+        .gallery-thumb {
+            width: 100%;
+            height: 60px;
+            object-fit: cover;
+            border-radius: 4px;
+            cursor: pointer;
+            border: 2px solid transparent;
+        }
+
+        .gallery-thumb.active {
+            border-color: var(--primary);
+        }
+
+        .p-details-title {
+            font-size: 2.5rem;
+            line-height: 1.2;
+            margin-bottom: 1rem;
+        }
+
+        .p-details-subtitle {
+            font-size: 1.1rem;
+            color: var(--text-muted);
+            margin-bottom: 1rem;
+            font-weight: 500;
+        }
+
+        .p-details-price {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        .p-details-price-old {
+            text-decoration: line-through;
+            color: var(--text-muted);
+            font-size: 1.1rem;
+            margin-right: 0.5rem;
+            opacity: 0.7;
+        }
+
+        /* --- DETAILED PRICE STYLING --- */
+        .details-price-container {
+            margin-bottom: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.2rem;
+        }
+
+        .original-price {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+            text-decoration: line-through;
+        }
+
+        .sell-price {
+            color: #ef4444;
+            /* Rokomari Red */
+            font-size: 1.8rem;
+            font-weight: 800;
+        }
+
+        .price-discount-info {
+            font-size: 0.95rem;
+            color: #16a34a;
+            /* Success Green */
+            font-weight: 500;
+        }
+
+        .js--save-message {
+            background: #f0fdf4;
+            padding: 2px 8px;
+            border-radius: 4px;
+            border: 1px dashed #16a34a;
+        }
+
+        .p-details-desc {
+            white-space: pre-wrap;
+            line-height: 1.6;
+            margin-bottom: 1rem;
+        }
+
+        .p-details-desc.clamped {
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .see-more-btn {
+            color: var(--primary);
+            font-weight: 600;
+            cursor: pointer;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+            display: none;
+        }
+
+        .buy-btn {
+            background: var(--secondary);
+            color: white;
+            padding: 1rem;
+            text-align: center;
+            border-radius: var(--radius);
+            display: block;
+            margin-top: 2rem;
+            font-weight: 700;
+            font-size: 1.2rem;
+        }
+
+        .stock-monitor {
+            padding: 0;
+            margin-bottom: 2rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .stock-monitor.no-border {
+            background: none !important;
+            border: none !important;
+            padding: 0 !important;
+        }
+
+        .status-indicator {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+        }
+
+        .status-indicator.loading {
+            background-color: var(--text-muted);
+            animation: stockPulse 1.5s infinite ease-in-out;
+        }
+
+        /* --- NEW STOCK STATUS STYLING --- */
+        .stock-available {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-weight: 600;
+            color: #10b981;
+            margin: 0;
+        }
+
+        .stock-icon-mini {
+            width: 18px;
+            height: 18px;
+        }
+
+        .text-danger {
+            color: #ef4444;
+            margin-left: 0.25rem;
+        }
+
+        .qty-stock-message {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            margin-top: 0.3rem;
+            font-style: italic;
+        }
+
+        @keyframes stockPulse {
+            0% {
+                opacity: 0.5;
+                transform: scale(0.9);
+            }
+
+            50% {
+                opacity: 1;
+                transform: scale(1.1);
+            }
+
+            100% {
+                opacity: 0.5;
+                transform: scale(0.9);
+            }
+        }
+
+        /* --- ADMIN PANEL --- */
+        .admin-layout {
+            display: grid;
+            grid-template-columns: 250px 1fr;
+            min-height: 80vh;
+            margin-top: 2rem;
+        }
+
+        .admin-sidebar {
+            background: var(--bg-white);
+            border-right: 1px solid var(--border);
+            padding: 1.5rem;
+        }
+
+        .admin-content {
+            padding: 2rem;
+            background: var(--bg-light);
+        }
+
+        .form-card {
+            background: var(--bg-white);
+            padding: 2rem;
+            border-radius: var(--radius);
+            border: 1px solid var(--border);
+            margin-bottom: 2rem;
+        }
+
+        .form-group {
+            margin-bottom: 1rem;
+        }
+
+        .form-label {
+            display: block;
+            font-weight: 500;
+            margin-bottom: 0.5rem;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            background: var(--bg-white);
+            color: var(--text-main);
+        }
+
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .data-table th,
+        .data-table td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid var(--border);
+        }
+
+        #login-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 100;
+        }
+
+        .login-box {
+            background: var(--bg-white);
+            padding: 2.5rem;
+            border-radius: var(--radius);
+            width: 100%;
+            max-width: 400px;
+        }
+
+        footer {
+            background: var(--bg-white);
+            border-top: 1px solid var(--border);
+            padding: 3rem 0;
+            margin-top: 4rem;
+            text-align: center;
+            color: var(--text-muted);
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <div class="container nav-wrapper">
+            <a href="#home" class="logo">
+                <span style="color:#ef4444">Remote</span><span style="color:#3b82f6">Ruler</span>
+            </a>
+            <nav class="nav-links">
+                <a href="#home" class="nav-link" data-view="home">Home</a>
+                <a href="#shop" class="nav-link" data-view="shop">Explore</a>
+                <a href="#admin" class="nav-link" data-view="admin">Admin</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- VIEWS -->
+    <main id="main-content">
+
+        <!-- HOME VIEW -->
+        <section id="view-home" class="view active">
+            <div class="hero">
+                <div class="container">
+                    <h1 class="hero-title">Discover the Best Deals</h1>
+                    <p class="hero-subtitle" id="hero-quote">Loading motivation...</p>
+                    <a class="libutton"
+                        href="https://www.linkedin.com/comm/mynetwork/discovery-see-all?usecase=PEOPLE_FOLLOWS&followMember=fahim-monayem-sopnil"
+                        target="_blank">Follow on LinkedIn</a>
+                </div>
+            </div>
+
+            <div class="container" style="margin-top: 4rem;">
+                <div class="section-header">
+                    <h2 class="section-title">Featured Products</h2>
+                    <a href="#shop" style="color: var(--primary); font-weight: 600;">View All &rarr;</a>
+                </div>
+                <div id="featured-grid" class="product-grid">
+                    <div class="centered-loading">Loading Products...</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SHOP VIEW -->
+        <section id="view-shop" class="view">
+            <div class="container page-layout">
+                <aside class="sidebar">
+                    <div class="filter-group">
+                        <span class="filter-title">Stores</span>
+                        <div id="store-filters">
+                            <!-- Injected by JS -->
+                        </div>
+                    </div>
+                    <div class="filter-group">
+                        <span class="filter-title">Categories</span>
+                        <div id="cat-filters">
+                            <!-- Injected by JS -->
+                        </div>
+                    </div>
+                </aside>
+                <div class="shop-content">
+                    <input type="text" id="searchInput" class="search-bar" placeholder="Search for products..."
+                        onkeyup="Shop.filter()">
+                    <div class="shop-toolbar">
+                        <span id="result-count" style="color: var(--text-muted);">Showing all products</span>
+                        <select id="sortSelect" onchange="Shop.filter()" class="sort-select"
+                            style="padding:0.5rem; border-radius:4px; border:1px solid var(--border); font-family:inherit;">
+                            <option value="newest">Newest First</option>
+                            <option value="price-low">Price: Low to High</option>
+                            <option value="price-high">Price: High to Low</option>
+                        </select>
+                    </div>
+                    <div id="shop-grid" class="product-grid"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- PRODUCT DETAIL VIEW -->
+        <section id="view-product" class="view">
+            <div class="container">
+                <div id="product-content" class="detail-container">
+                    <div class="centered-loading">Loading Product Details...</div>
+                </div>
+                <div class="related-section" style="margin-top:5rem;">
+                    <h3 class="section-title">Related Products</h3>
+                    <div id="related-grid" class="product-grid"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ADMIN VIEW -->
+        <section id="view-admin" class="view">
+            <div id="login-overlay">
+                <div class="login-box">
+                    <h2 style="margin-bottom:1.5rem">Admin Login</h2>
+                    <input type="password" id="adminPass" class="form-input" style="margin-bottom:1rem"
+                        placeholder="Enter Admin Password">
+                    <button class="btn btn-primary" style="width:100%" onclick="Admin.login()">Login</button>
+                    <div style="text-align: center; margin-top: 1rem;">
+                        <a href="https://web.whatsapp.com/send?autoload=1&app_absent=0&phone=8801703295566&text=Hello,%20I%20need%20Admin%20Access"
+                            target="_blank" style="font-size: 0.9rem; color: var(--primary); font-weight: 600;">Contact
+                            for Admin Access</a>
+                    </div>
+                    <a href="#home"
+                        style="display:block; text-align:center; margin-top:1rem; font-size:0.9rem; color:var(--text-muted)">Cancel</a>
+                </div>
+            </div>
+
+            <div id="admin-ui" class="container admin-layout" style="display:none; filter:blur(4px)">
+                <aside class="admin-sidebar">
+                    <nav style="display:flex; flex-direction:column; gap:1rem">
+                        <button class="btn" style="text-align:left" onclick="Admin.showTab('add')">➕ Add
+                            Product</button>
+                        <button class="btn" style="text-align:left" onclick="Admin.showTab('manage')">📦
+                            Inventory</button>
+                        <button class="btn btn-primary" onclick="Admin.exportJSON()" style="margin-top:2rem">📥 Export
+                            JSON</button>
+
+                    </nav>
+                </aside>
+
+                <main class="admin-content">
+                    <div id="admin-tab-add" class="admin-tab">
+                        <h2 class="section-title" style="margin-bottom:1.5rem">Add New Product</h2>
+                        <div class="form-card">
+                            <div class="form-group">
+                                <label class="form-label">Product URL</label>
+                                <div style="display:flex; gap:1rem">
+                                    <input type="text" id="rawUrl" class="form-input"
+                                        placeholder="Paste URL from Amazon, Rokomari, etc.">
+                                    <button class="btn btn-primary" onclick="Admin.parse()">Auto Fetch</button>
+                                </div>
+                            </div>
+                            <div id="product-form"
+                                style="display:none; margin-top:2rem; border-top:1px solid var(--border); padding-top:2rem">
+                                <input type="hidden" id="p_id">
+                                <div style="display:grid; grid-template-columns:1fr 1fr; gap:1rem">
+                                    <div class="form-group"><label class="form-label">Title</label><input type="text"
+                                            id="p_title" class="form-input"></div>
+                                    <div class="form-group"><label class="form-label">Subtitle</label><input type="text"
+                                            id="p_subtitle" class="form-input"></div>
+                                    <div class="form-group">
+                                        <label class="form-label">Store</label>
+                                        <select id="p_store" class="form-input">
+                                            <option value="rokomari">Rokomari</option>
+                                            <option value="amazon">Amazon</option>
+                                            <option value="aliexpress">AliExpress</option>
+                                            <option value="pickaboo">Pickaboo</option>
+                                            <option value="star-tech">Star Tech</option>
+                                            <option value="ryans">Ryans</option>
+                                            <option value="bdshop">BDShop</option>
+                                            <option value="others">Others</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="form-label">Category</label>
+                                        <select id="p_category" class="form-input">
+                                            <option value="Electronics">Electronics</option>
+                                            <option value="Books">Books</option>
+                                            <option value="Fashion">Fashion</option>
+                                            <option value="Gadgets">Gadgets</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group"><label class="form-label">Current Price (BDT)</label><input
+                                            type="number" id="p_price" class="form-input"></div>
+                                    <div class="form-group"><label class="form-label">Original Price (BDT)</label><input
+                                            type="number" id="p_original" class="form-input"></div>
+                                    <div class="form-group"><label class="form-label">Thumbnail URL</label><input
+                                            type="text" id="p_image" class="form-input"></div>
+                                    <div class="form-group"><label class="form-label">Gallery URLs (one per
+                                            line)</label><textarea id="p_gallery" class="form-input"
+                                            rows="3"></textarea></div>
+                                </div>
+                                <div class="form-group"><label class="form-label">Description</label><textarea
+                                        id="p_desc" class="form-input" rows="5"></textarea></div>
+                                <div class="form-group"><label><input type="checkbox" id="p_featured"> Mark as
+                                        Featured</label></div>
+                                <div style="display:flex; gap:1rem">
+                                    <button class="btn btn-primary" onclick="Admin.save()">Save Product</button>
+                                    <button class="btn" onclick="Admin.resetForm()">Cancel</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="admin-tab-manage" class="admin-tab" style="display:none">
+                        <h2 class="section-title" style="margin-bottom:1.5rem">Inventory Management</h2>
+                        <div class="form-card" style="padding:0">
+                            <table class="data-table">
+                                <thead>
+                                    <tr>
+                                        <th>Image</th>
+                                        <th>Title</th>
+                                        <th>Store</th>
+                                        <th>Price</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="inventory-body"></tbody>
+                            </table>
+                        </div>
+                    </div>
+                </main>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; Remote Ruler Affiliate Market. All rights reserved.</p>
+            <p style="font-size: 0.9rem; margin-top:0.5rem">Transparent Deals, Curated for You.</p>
+        </div>
+    </footer>
+
+    <!-- LOGIC -->
+    <script>
+        /**
+         * --- 1. CORE UTILS ---
+         */
+        const Utils = {
+            formatMoney: (amount, curr = 'BDT') => new Intl.NumberFormat('en-US', { style: 'currency', currency: curr, minimumFractionDigits: 0 }).format(amount),
+            Store: {
+                get: (k) => JSON.parse(localStorage.getItem(k) || 'null'),
+                set: (k, v) => localStorage.setItem(k, JSON.stringify(v))
+            },
+            Theme: {
+                init: () => {
+                    document.documentElement.setAttribute('data-theme', 'light');
+                }
+            },
+            getParam: (p) => {
+                const search = window.location.hash.includes('?') ? window.location.hash.split('?')[1] : '';
+                return new URLSearchParams(search).get(p);
+            }
+        };
+
+        /**
+         * --- 2. DATA MANAGEMENT ---
+         */
+        const DataManager = {
+            // EMBEDDED DATA ASSETS
+            defaultData: [
+                {
+                    "id": "prod_001",
+                    "title": "Atomic Habits",
+                    "price": 850,
+                    "original_price": 1200,
+                    "discount": 29,
+                    "currency": "BDT",
+                    "image": "https://m.media-amazon.com/images/I/81wgcld4wxL._AC_UF1000,1000_QL80_.jpg",
+                    "store": "rokomari",
+                    "affiliate_link": "https://www.rokomari.com/book/12345/atomic-habits?ref=MY_AFF_ID",
+                    "category": "Books",
+                    "rating": 4.8,
+                    "description": "No matter your goals, Atomic Habits offers a proven framework for improving--every day.",
+                    "is_featured": true,
+                    "stock_status": "in_stock",
+                    "last_checked": "2026-01-31T12:00:00Z",
+                    "date_added": "2026-01-30T10:00:00Z"
+                }
+            ],
+            products: [],
+            init: async () => {
+                const local = Utils.Store.get('aff_products');
+                if (local && local.length > 0) {
+                    DataManager.products = local;
+                } else {
+                    DataManager.products = DataManager.defaultData;
+                    Utils.Store.set('aff_products', DataManager.defaultData);
+                }
+            },
+            getAll: () => DataManager.products,
+            getById: (id) => DataManager.products.find(p => p.id === id)
+        };
+
+        /**
+         * --- 3. PARSER & STOCK ---
+         */
+        const AffiliateParser = {
+            detect: (url) => {
+                const u = url.toLowerCase();
+                if (u.includes('rokomari.com')) return 'rokomari';
+                if (u.includes('amazon.')) return 'amazon';
+                if (u.includes('aliexpress.')) return 'aliexpress';
+                if (u.includes('startech.')) return 'star-tech';
+                if (u.includes('ryans.')) return 'ryans';
+                if (u.includes('bdshop.')) return 'bdshop';
+                return 'others';
+            },
+            checkStock: async (url) => {
+                try {
+                    const res = await fetch(`https://api.allorigins.win/get?url=${encodeURIComponent(url)}`);
+                    const d = await res.json();
+                    const h = d.contents.toLowerCase();
+                    const out = ['out of stock', 'unavailable', 'sold out', 'পাওয়া যাচ্ছে না'].some(k => h.includes(k));
+                    return out ? 'out_of_stock' : 'in_stock';
+                } catch (e) { return 'unknown'; }
+            }
+        };
+
+        /**
+         * --- 4. VIEWS & ROUTING ---
+         */
+        const Router = {
+            init: () => {
+                window.addEventListener('hashchange', Router.handle);
+                Router.handle();
+            },
+            handle: () => {
+                const hash = window.location.hash || '#home';
+                const path = hash.split('?')[0];
+
+                document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
+                document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
+
+                if (path === '#home') {
+                    document.getElementById('view-home').classList.add('active');
+                    document.querySelector('[data-view="home"]').classList.add('active');
+                    Render.featured();
+                }
+                else if (path === '#shop') {
+                    document.getElementById('view-shop').classList.add('active');
+                    document.querySelector('[data-view="shop"]').classList.add('active');
+                    Shop.init();
+                }
+                else if (path === '#product') {
+                    document.getElementById('view-product').classList.add('active');
+                    ProductDetail.init();
+                }
+                else if (path === '#admin') {
+                    document.getElementById('view-admin').classList.add('active');
+                    document.querySelector('[data-view="admin"]').classList.add('active');
+                }
+                window.scrollTo(0, 0);
+            }
+        };
+
+        /**
+         * --- 5. RENDERERS ---
+         */
+        const Render = {
+            card: (p) => {
+                const div = document.createElement('div');
+                div.className = 'product-card';
+
+                // Calculate Discount locally if not pre-provided correctly
+                const disc = p.discount || (p.original_price > p.price ? Math.round(((p.original_price - p.price) / p.original_price) * 100) : 0);
+
+                div.innerHTML = `
+                    <a href="#product?id=${p.id}">
+                        ${disc > 0 ? `<div class="discount-badge">${disc}%<span>OFF</span></div>` : ''}
+                        <img src="${p.image}" class="product-image" alt="${p.title}" loading="lazy">
+                        <div class="card-body">
+                            <h3 class="product-title">${p.title}</h3>
+                            <div class="product-subtitle">${p.subtitle || ''}</div>
+                            <div class="price-area">
+                                <span class="current-price">${Utils.formatMoney(p.price, p.currency)}</span>
+                                ${p.original_price > p.price ? `<span class="old-price">${Utils.formatMoney(p.original_price, p.currency)}</span>` : ''}
+                            </div>
+                        </div>
+                    </a>
+                `;
+                return div;
+            },
+            featured: () => {
+                const grid = document.getElementById('featured-grid');
+                grid.innerHTML = '';
+                const items = DataManager.getAll().filter(p => p.is_featured).slice(0, 8);
+                (items.length ? items : DataManager.getAll().slice(0, 4)).forEach(p => grid.appendChild(Render.card(p)));
+            }
+        };
+
+        /**
+         * --- 6. SHOP LOGIC ---
+         */
+        const Shop = {
+            init: () => {
+                const stores = [...new Set(DataManager.getAll().map(p => p.store))];
+                const cats = [...new Set(DataManager.getAll().map(p => p.category))];
+
+                document.getElementById('store-filters').innerHTML = stores.map(s => `
+                    <label class="filter-item"><input type="checkbox" name="store" value="${s}" onchange="Shop.filter()"> ${s}</label>
+                `).join('');
+                document.getElementById('cat-filters').innerHTML = cats.map(c => `
+                    <label class="filter-item"><input type="checkbox" name="category" value="${c}" onchange="Shop.filter()"> ${c}</label>
+                `).join('');
+
+                const urlCat = Utils.getParam('category');
+                if (urlCat) document.querySelectorAll(`input[value="${urlCat}"]`).forEach(i => i.checked = true);
+
+                Shop.filter();
+            },
+            filter: () => {
+                const q = document.getElementById('searchInput').value.toLowerCase();
+                const selStores = Array.from(document.querySelectorAll('input[name="store"]:checked')).map(i => i.value);
+                const selCats = Array.from(document.querySelectorAll('input[name="category"]:checked')).map(i => i.value);
+                const sort = document.getElementById('sortSelect').value;
+
+                let items = DataManager.getAll().filter(p => {
+                    const matchQ = p.title.toLowerCase().includes(q) || p.category.toLowerCase().includes(q);
+                    const matchStore = !selStores.length || selStores.includes(p.store);
+                    const matchCat = !selCats.length || selCats.includes(p.category);
+                    return matchQ && matchStore && matchCat;
+                });
+
+                if (sort === 'price-low') items.sort((a, b) => a.price - b.price);
+                else if (sort === 'price-high') items.sort((a, b) => b.price - a.price);
+                else items.sort((a, b) => new Date(b.date_added) - new Date(a.date_added));
+
+                const grid = document.getElementById('shop-grid');
+                grid.innerHTML = '';
+                items.forEach(p => grid.appendChild(Render.card(p)));
+                document.getElementById('result-count').innerText = `Showing ${items.length} results`;
+            }
+        };
+
+        /**
+         * --- 7. PRODUCT DETAIL LOGIC ---
+         */
+        const ProductDetail = {
+            init: async () => {
+                const id = Utils.getParam('id');
+                const p = DataManager.getById(id);
+                const container = document.getElementById('product-content');
+
+                if (!p) { container.innerHTML = '<h2>Product not found</h2>'; return; }
+
+                // Calculate Discount
+                const disc = p.discount || (p.original_price > p.price ? Math.round(((p.original_price - p.price) / p.original_price) * 100) : 0);
+
+                container.innerHTML = `
+                    <div style="position:relative">
+                        ${disc > 0 ? `<div class="discount-badge" style="width:70px; height:70px; font-size:1.1rem; top:20px; left:20px">${disc}%<span>OFF</span></div>` : ''}
+                        <img id="main-product-image" src="${p.image}" class="main-image">
+                        <div class="gallery-grid">
+                            ${[p.image, ...(p.images || [])].map((img, i) => `
+                                <img src="${img}" class="gallery-thumb ${i === 0 ? 'active' : ''}" onclick="ProductDetail.changeImg(this)">
+                            `).join('')}
+                        </div>
+                    </div>
+                    <div class="product-meta">
+                        <h1 class="p-details-title">${p.title}</h1>
+                        <div class="p-details-subtitle">${p.subtitle || ''}</div>
+                        <div class="details-price-container">
+                            ${p.original_price > p.price ? `<strike class="original-price">TK. ${p.original_price}</strike>` : ''}
+                            <span class="sell-price">TK. ${p.price}</span>
+                            ${p.original_price > p.price ? `
+                                <span class="price-discount-info">
+                                    <span class="js--save-message">You Save TK. ${p.original_price - p.price} (${disc}%)</span>
+                                </span>
+                            ` : ''}
+                        </div>
+                        <div id="stock-panel" class="stock-monitor">
+                            <span class="status-indicator loading"></span>
+                            <span id="stock-text">Checking live availability...</span>
+                        </div>
+                        <div id="desc-wrap">
+                            <p id="p-desc" class="p-details-desc clamped">${p.description || 'No description available.'}</p>
+                            <span id="see-more" class="see-more-btn" onclick="ProductDetail.toggleDesc()">See more</span>
+                        </div>
+                        <a href="${p.affiliate_link}" target="_blank" class="buy-btn">Buy Now on ${p.store}</a>
+                    </div>
+                `;
+
+                AffiliateParser.checkStock(p.affiliate_link).then(s => {
+                    const panel = document.getElementById('stock-panel');
+                    if (s === 'out_of_stock') {
+                        panel.innerHTML = `
+                            <div class="stock-available" style="color:#ef4444">
+                                <span class="status-indicator" style="background:#ef4444; margin-right:5px"></span> Out of Stock
+                            </div>
+                        `;
+                    } else {
+                        const qty = Math.floor(Math.random() * 20) + 5; // Simulating low stock for urgency
+                        panel.innerHTML = `
+                            <div class="stock-info-wrapper">
+                                <div class="stock-available">
+                                    <svg class="stock-icon-mini" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                                    In Stock 
+                                </div>
+                                <p class="qty-stock-message">* স্টক আউট হওয়ার আগেই অর্ডার করুন</p>
+                            </div>
+                        `;
+                        panel.classList.add('no-border'); // Optional clean up of old box
+                    }
+                });
+
+                // Clamping
+                setTimeout(() => {
+                    const d = document.getElementById('p-desc');
+                    if (d.scrollHeight > d.offsetHeight + 10) document.getElementById('see-more').style.display = 'block';
+                }, 200);
+
+                // Related
+                const relGrid = document.getElementById('related-grid');
+                relGrid.innerHTML = '';
+                DataManager.getAll().filter(r => r.category === p.category && r.id !== p.id).slice(0, 4).forEach(r => relGrid.appendChild(Render.card(r)));
+            },
+            changeImg: (el) => {
+                document.getElementById('main-product-image').src = el.src;
+                document.querySelectorAll('.gallery-thumb').forEach(t => t.classList.remove('active'));
+                el.classList.add('active');
+            },
+            toggleDesc: () => {
+                const d = document.getElementById('p-desc');
+                const b = document.getElementById('see-more');
+                const is = d.classList.contains('clamped');
+                d.classList.toggle('clamped');
+                b.innerText = is ? 'See less' : 'See more';
+            }
+        };
+
+        /**
+         * --- 8. ADMIN LOGIC ---
+         */
+        const Admin = {
+            login: () => {
+                const p = document.getElementById('adminPass').value;
+                if (p === 'SopnilJawata@11/07/23@29/12/23@11/29/23@29?11?23@!@#$$%%$%#%$^%#XVAGFGHAVDYFAGDAYRFDAHGGDYUG265ege46564') {
+                    document.getElementById('login-overlay').style.display = 'none';
+                    document.getElementById('admin-ui').style.display = 'grid';
+                    document.getElementById('admin-ui').style.filter = 'none';
+                    Admin.renderInventory();
+                } else alert('Access Denied');
+            },
+            showTab: (t) => {
+                document.querySelectorAll('.admin-tab').forEach(el => el.style.display = 'none');
+                document.getElementById(`admin-tab-${t}`).style.display = 'block';
+            },
+            parse: async () => {
+                const url = document.getElementById('rawUrl').value;
+                if (!url) return;
+                const store = AffiliateParser.detect(url);
+                document.getElementById('p_store').value = store;
+                document.getElementById('product-form').style.display = 'block';
+            },
+            save: () => {
+                const id = document.getElementById('p_id').value || 'prod_' + Date.now();
+                const p = {
+                    id,
+                    title: document.getElementById('p_title').value,
+                    subtitle: document.getElementById('p_subtitle').value,
+                    store: document.getElementById('p_store').value,
+                    category: document.getElementById('p_category').value,
+                    price: parseFloat(document.getElementById('p_price').value),
+                    original_price: parseFloat(document.getElementById('p_original').value),
+                    image: document.getElementById('p_image').value,
+                    images: document.getElementById('p_gallery').value.split('\n').filter(l => l.trim()),
+                    description: document.getElementById('p_desc').value,
+                    is_featured: document.getElementById('p_featured').checked,
+                    affiliate_link: document.getElementById('rawUrl').value,
+                    date_added: new Date().toISOString()
+                };
+
+                const all = DataManager.getAll();
+                const idx = all.findIndex(x => x.id === id);
+                if (idx > -1) all[idx] = p; else all.unshift(p);
+
+                Utils.Store.set('aff_products', all);
+                alert('Saved! Now Export JSON and push to GitHub.');
+                Admin.resetForm();
+                Admin.renderInventory();
+                Admin.showTab('manage');
+            },
+            edit: (id) => {
+                const p = DataManager.getById(id);
+                document.getElementById('p_id').value = p.id;
+                document.getElementById('p_title').value = p.title;
+                document.getElementById('p_subtitle').value = p.subtitle || '';
+                document.getElementById('p_price').value = p.price;
+                document.getElementById('p_original').value = p.original_price;
+                document.getElementById('rawUrl').value = p.affiliate_link;
+                document.getElementById('p_image').value = p.image;
+                document.getElementById('p_desc').value = p.description;
+                document.getElementById('p_featured').checked = p.is_featured;
+                document.getElementById('product-form').style.display = 'block';
+                Admin.showTab('add');
+            },
+            delete: (id) => {
+                if (!confirm('Delete?')) return;
+                const filtered = DataManager.getAll().filter(x => x.id !== id);
+                Utils.Store.set('aff_products', filtered);
+                DataManager.products = filtered;
+                Admin.renderInventory();
+            },
+            renderInventory: () => {
+                const b = document.getElementById('inventory-body');
+                b.innerHTML = DataManager.getAll().map(p => `
+                    <tr>
+                        <td><img src="${p.image}" style="width:40px; border-radius:4px"></td>
+                        <td>${p.title}</td>
+                        <td>${p.store}</td>
+                        <td>${p.price}</td>
+                        <td>
+                            <button class="btn" onclick="Admin.edit('${p.id}')">✏️</button>
+                            <button class="btn" style="color:red" onclick="Admin.delete('${p.id}')">🗑️</button>
+                        </td>
+                    </tr>
+                `).join('');
+            },
+            resetForm: () => {
+                document.getElementById('product-form').style.display = 'none';
+                document.getElementById('p_id').value = '';
+                document.getElementById('rawUrl').value = '';
+            },
+            exportJSON: () => {
+                const blob = new Blob([JSON.stringify(DataManager.getAll(), null, 2)], { type: 'application/json' });
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url; a.download = 'products.json'; a.click();
+            }
+        };
+
+        /**
+         * --- 9. QUOTE TICKER ---
+         */
+        const QuoteTicker = {
+            quotes: [
+                "Your only limit is your mind.",
+                "Push yourself, because no one else is going to do it for you.",
+                "Success doesn’t just find you. You have to go out and get it.",
+                "The harder you work for something, the greater you’ll feel when you achieve it.",
+                "Dream it. Wish it. Do it.",
+                "Don’t stop when you’re tired. Stop when you’re done.",
+                "Wake up with determination. Go to bed with satisfaction.",
+                "Do something today that your future self will thank you for.",
+                "Little things make big days.",
+                "It’s going to be hard, but hard does not mean impossible.",
+                "Don’t wait for opportunity. Create it.",
+                "Sometimes we’re tested not to show our weaknesses, but to discover our strengths.",
+                "The key to success is to focus on goals, not obstacles.",
+                "Dream bigger. Do bigger.",
+                "Believe in yourself and all that you are.",
+                "You are braver than you believe, stronger than you seem, and smarter than you think.",
+                "Confidence comes not from always being right but from not fearing to be wrong.",
+                "Quality is not an act, it is a habit.",
+                "Setting goals is the first step in turning the invisible into the visible.",
+                "I can and I will.",
+                "Success is what happens after you have survived all of your disappointments.",
+                "Focus on your goals, the rest is just noise.",
+                "Action is the foundational key to all success.",
+                "Work hard in silence, let your success be your noise.",
+                "Determination is doing what needs to be done even when you don't feel like doing it.",
+                "If you want to fly, give up everything that weighs you down.",
+                "Growth begins at the end of your comfort zone.",
+                "Be so good they can't ignore you.",
+                "Everything you've ever wanted is on the other side of fear.",
+                "Small steps in the right direction can turn out to be the biggest steps of your life.",
+                "Hard transformation is better than no transformation.",
+                "The journey of a thousand miles begins with one step.",
+                "Stay hungry, stay foolish.",
+                "Don't count the days, make the days count.",
+                "The best way to predict the future is to create it.",
+                "You miss 100% of the shots you don't take.",
+                "Whether you think you can or you think you can't, you're right.",
+                "I have not failed. I've just found 10,000 ways that won't work.",
+                "Start where you are. Use what you have. Do what you can.",
+                "The only way to do great work is to love what you do.",
+                "It always seems impossible until it's done.",
+                "Keep your face always toward the sunshine—and shadows will fall behind you.",
+                "Perseverance is not a long race; it is many short races one after the other.",
+                "Everything you can imagine is real.",
+                "Happiness is not something ready made. It comes from your own actions.",
+                "The mind is everything. What you think you become.",
+                "The best revenge is massive success.",
+                "Go confidently in the direction of your dreams.",
+                "Life is what happens when you're busy making other plans.",
+                "Life is 10% what happens to me and 90% of how I react to it.",
+                "It does not matter how slowly you go as long as you do not stop.",
+                "Everything has beauty, but not everyone sees it.",
+                "Choose a job you love, and you will never have to work a day in your life.",
+                "Our greatest glory is not in never falling, but in rising every time we fall.",
+                "Success is not final, failure is not fatal: it is the courage to continue that counts.",
+                "Believe you can and you're halfway there.",
+                "Act as if what you do makes a difference. It does.",
+                "In the middle of every difficulty lies opportunity.",
+                "What you get by achieving your goals is not as important as what you become by achieving your goals.",
+                "You are never too old to set another goal or to dream a new dream.",
+                "The only version of yourself you should try to be better than is the one you were yesterday.",
+                "Happiness is the only thing that multiplies when you share it.",
+                "Difficult roads often lead to beautiful destinations.",
+                "Be the change that you wish to see in the world.",
+                "Do what you can, with what you have, where you are.",
+                "Start each day with a positive thought and a grateful heart.",
+                "The only way to achieve the impossible is to believe it is possible.",
+                "Your time is limited, so don't waste it living someone else's life.",
+                "Make each day your masterpiece.",
+                "Success is the sum of small efforts, repeated day-in and day-out.",
+                "Don't let yesterday take up too much of today.",
+                "The secret of getting ahead is getting started.",
+                "Limitations live only in our minds. But if we use our imaginations, our possibilities become limitless.",
+                "The future depends on what you do today.",
+                "A winner is a dreamer who never gives up.",
+                "Don't cry because it's over, smile because it happened.",
+                "Everything you need is already inside you. Get started.",
+                "Opportunities don't happen, you create them.",
+                "Great things never come from comfort zones.",
+                "Dream it. Believe it. Build it.",
+                "Don't stay in bed, unless you can make money in bed.",
+                "Stop doubting yourself. Work hard and make it happen.",
+                "Sometimes 'later' becomes 'never'. Do it now.",
+                "Great things take time. Be patient.",
+                "Focus on being productive instead of busy.",
+                "If you can dream it, you can do it.",
+                "Hard work beats talent when talent doesn't work hard.",
+                "The only limit to our realization of tomorrow will be our doubts of today.",
+                "The big secret in life is that there is no big secret. Whatever your goal, you can get there if you are willing to work.",
+                "You don't have to be great to start, but you have to start to be great.",
+                "Don't let what you cannot do interfere with what you can do.",
+                "I attribute my success to this: I never gave or took any excuse.",
+                "Even if you fall on your face, you're still moving forward.",
+                "Build your own dreams, or someone else will hire you to build theirs.",
+                "I never dreamed about success, I worked for it.",
+                "Either you run the day or the day runs you.",
+                "Change your thoughts and you change your world.",
+                "Productivity is never an accident. It is always the result of a commitment to excellence.",
+                "What you do speaks so loudly that I cannot hear what you say.",
+                "Well done is better than well said.",
+                "One day or day one. You decide.",
+                "Your passion is waiting for your courage to catch up.",
+                "Believe in your infinite potential.",
+                "Don't follow the crowd, let the crowd follow you.",
+                "A year from now you may wish you had started today.",
+                "Do not wait to strike till the iron is hot; but make it hot by striking.",
+                "The successful warrior is the average man, with laser-like focus.",
+                "You must be the change you wish to see in the world.",
+                "Always do your best. What you plant now, you will harvest later.",
+                "Don't be pushed around by the fears in your mind. Be led by the dreams in your heart.",
+                "Instead of wondering when your next vacation is, maybe you should set up a life you don't need to escape from.",
+                "The grass is greener where you water it.",
+                "If it's important to you, you'll find a way. If not, you'll find an excuse.",
+                "Be a voice, not an echo.",
+                "Work until your idols become your rivals.",
+                "A creative man is motivated by the desire to achieve, not by the desire to beat others.",
+                "Don't stop until you're proud.",
+                "Challenges are what make life interesting and overcoming them is what makes life meaningful.",
+                "Failure is the condiment that gives success its flavor.",
+                "If you want to live a happy life, tie it to a goal, not to people or things.",
+                "The best time to plant a tree was 20 years ago. The second best time is now.",
+                "I would rather die of passion than of boredom.",
+                "If you’re going through hell, keep going.",
+                "It is never too late to be what you might have been.",
+                "There is no substitute for hard work.",
+                "Keep going. Everything you need will come to you at the perfect time.",
+                "Focus on the step in front of you, not the whole staircase.",
+                "Energy and persistence conquer all things.",
+                "Small progress is still progress.",
+                "Make today so awesome that yesterday gets jealous.",
+                "Discipline is doing what needs to be done, even if you don't want to do it.",
+                "Your life does not get better by chance, it gets better by change.",
+                "Kindness is the language which the deaf can hear and the blind can see.",
+                "Do not let the behavior of others destroy your inner peace.",
+                "Don't watch the clock; do what it does. Keep going.",
+                "Winning isn't everything, but wanting to win is.",
+                "Success is getting what you want. Happiness is wanting what you get.",
+                "Strive not to be a success, but rather to be of value.",
+                "You can't use up creativity. The more you use, the more you have.",
+                "Doubt kills more dreams than failure ever will.",
+                "Whatever you are, be a good one.",
+                "It's not whether you get knocked down, it's whether you get up.",
+                "The only person you are destined to become is the person you decide to be.",
+                "Integrity is doing the right thing, even when no one is watching.",
+                "If you tell the truth, you don't have to remember anything.",
+                "Logic will get you from A to B. Imagination will take you everywhere.",
+                "Life is either a daring adventure or nothing at all.",
+                "Your attitude, not your aptitude, will determine your altitude.",
+                "The greatest discovery of all time is that a person can change his future by merely changing his attitude.",
+                "When one door of happiness closes, another opens.",
+                "Keep your eyes on the stars, and your feet on the ground.",
+                "Optimism is the faith that leads to achievement.",
+                "The way to get started is to quit talking and begin doing.",
+                "Do what you love and the money will follow.",
+                "First, have a definite, clear practical ideal; a goal, an objective.",
+                "Don't find fault, find a remedy.",
+                "Quality means doing it right when no one is looking.",
+                "Thinking is the hardest work there is, which is probably the reason why so few engage in it.",
+                "I am not a product of my circumstances. I am a product of my decisions.",
+                "We become what we think about.",
+                "People who are crazy enough to think they can change the world, are the ones who do.",
+                "If people are not laughing at your goals, your goals are too small.",
+                "A ship is safe in harbor, but that’s not what ships are for.",
+                "Everything is possible for him who believes.",
+                "The only way to have a friend is to be one.",
+                "Twenty years from now you will be more disappointed by the things that you didn't do than by the ones you did do.",
+                "Do not go where the path may lead, go instead where there is no path and leave a trail.",
+                "The only journey is the one within.",
+                "To be yourself in a world that is constantly trying to make you something else is the greatest accomplishment.",
+                "What lies behind us and what lies before us are tiny matters compared to what lies within us.",
+                "You must do the things you think you cannot do.",
+                "Life is short, and it is up to you to make it sweet.",
+                "The power of imagination makes us infinite.",
+                "Stay patient and trust the journey.",
+                "Hardships often prepare ordinary people for an extraordinary destiny.",
+                "The standard you walk past is the standard you accept.",
+                "The only thing standing between you and your goal is the story you keep telling yourself as to why you can't achieve it.",
+                "Your energy is your greatest asset. Protect it.",
+                "Focus on your progress, not your perfection.",
+                "You cannot change your destination overnight, but you can change your direction overnight.",
+                "Success is not how high you have climbed, but how you make a positive difference to the world.",
+                "The expert in anything was once a beginner.",
+                "Do not judge each day by the harvest you reap but by the seeds that you plant.",
+                "The most effective way to do it, is to do it.",
+                "Don't give up. The beginning is always the hardest.",
+                "If you want something you've never had, you must be willing to do something you've never done.",
+                "Be so busy improving yourself that you have no time to criticize others.",
+                "The best preparation for tomorrow is doing your best today.",
+                "Life is not about finding yourself. Life is about creating yourself.",
+                "Every day is a second chance.",
+                "Go where you feel most alive.",
+                "Simplicity is the ultimate sophistication.",
+                "In the end, we only regret the chances we didn't take.",
+                "Your vibe attracts your tribe."
+            ],
+            currentIndex: 0,
+            shuffled: [],
+            init: () => {
+                const el = document.getElementById('hero-quote');
+                if (!el) return;
+                QuoteTicker.shuffled = [...QuoteTicker.quotes].sort(() => Math.random() - 0.5);
+                QuoteTicker.update();
+                setInterval(QuoteTicker.update, 5000);
+            },
+            update: () => {
+                const el = document.getElementById('hero-quote');
+                if (!el) return;
+                el.style.opacity = 0;
+                setTimeout(() => {
+                    el.innerText = QuoteTicker.shuffled[QuoteTicker.currentIndex];
+                    el.style.opacity = 1;
+                    QuoteTicker.currentIndex++;
+                    if (QuoteTicker.currentIndex >= QuoteTicker.shuffled.length) {
+                        QuoteTicker.currentIndex = 0;
+                        QuoteTicker.shuffled = [...QuoteTicker.quotes].sort(() => Math.random() - 0.5);
+                    }
+                }, 500);
+            }
+        };
+
+        /**
+         * --- 10. BOOTSTRAP ---
+         */
+        document.addEventListener('DOMContentLoaded', async () => {
+            Utils.Theme.init();
+            await DataManager.init();
+            Router.init();
+            QuoteTicker.init();
+        });
+    </script>
+</body>
+
+</html>
